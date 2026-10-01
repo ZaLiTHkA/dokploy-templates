@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  campfire:
+    image: ghcr.io/basecamp/once-campfire:1.5.1
+    restart: unless-stopped
+    # Generate a persistent VAPID key pair (Web Push) on first boot unless one is provided
+    command:
+      - bash
+      - -c
+      - |
+        if [ -z "$${VAPID_PRIVATE_KEY}" ] || [ -z "$${VAPID_PUBLIC_KEY}" ]; then
+          [ -s storage/vapid.env ] || script/admin/generate-secrets | grep '^VAPID_' > storage/vapid.env
+          set -a; . storage/vapid.env; set +a
+        fi
+        exec bin/boot
+    environment:
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      VAPID_PRIVATE_KEY: ${VAPID_PRIVATE_KEY}
+      VAPID_PUBLIC_KEY: ${VAPID_PUBLIC_KEY}
+      DISABLE_SSL: ${DISABLE_SSL}
+      SKIP_TELEMETRY: ${SKIP_TELEMETRY}
+      SENTRY_DSN: ${SENTRY_DSN}
+    volumes:
+      - campfire-storage:/rails/storage
+    expose:
+      - "80"
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost/up"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+
+volumes:
+  campfire-storage:

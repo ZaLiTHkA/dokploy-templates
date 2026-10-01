@@ -1,0 +1,19 @@
+{
+  "id": "campfire",
+  "name": "Campfire",
+  "version": "1.5.1",
+  "description": "Campfire is a simple, self-hosted group chat by 37signals with rooms, direct messages, file attachments, search, @mentions, Web Push notifications and a bot API.",
+  "logo": "campfire.png",
+  "links": {
+    "github": "https://github.com/basecamp/once-campfire",
+    "website": "https://once.com/campfire",
+    "docs": "https://github.com/basecamp/once-campfire/blob/main/docs/self-hosting.md"
+  },
+  "tags": [
+    "chat",
+    "communication",
+    "collaboration",
+    "messaging",
+    "self-hosted"
+  ]
+}
