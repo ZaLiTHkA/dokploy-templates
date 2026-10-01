@@ -1,0 +1,22 @@
+[variables]
+main_domain = "${domain}"
+secret_key_base = "${password:128}"
+
+[config]
+mounts = []
+
+[[config.domains]]
+serviceName = "campfire"
+port = 80
+host = "${main_domain}"
+
+[config.env]
+SECRET_KEY_BASE = "${secret_key_base}"
+# Empty = generate a key pair on first boot (saved in the storage volume)
+VAPID_PRIVATE_KEY = ""
+VAPID_PUBLIC_KEY = ""
+# Required: TLS is terminated by Dokploy's proxy
+DISABLE_SSL = "true"
+# Any non-empty value, even "false", disables Sentry (see instructions.md)
+SKIP_TELEMETRY = "true"
+SENTRY_DSN = ""
