@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <radialGradient id="glow" gradientUnits="userSpaceOnUse" cx="64" cy="166.4" r="178.3">
+      <stop offset="0" stop-color="#8b5cf6"/>
+      <stop offset="0.9" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.18"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="1.6" stdDeviation="0" flood-color="#000" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="128" height="128" rx="25.6" fill="#7c3aed"/>
+  <rect width="128" height="128" rx="25.6" fill="url(#glow)"/>
+  <rect width="128" height="128" rx="25.6" fill="url(#shade)" style="mix-blend-mode:soft-light"/>
+  <rect x="0.8" y="0.8" width="126.4" height="126.4" rx="24.8" fill="none" stroke="#fff" stroke-opacity="0.1" stroke-width="1.6"/>
+  <!-- Lucide "cloud-sync" icon (ISC License, https://lucide.dev) -->
+  <g transform="translate(32 32) scale(2.6667)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="url(#shadow)">
+    <path d="m17 18-1.535 1.605a5 5 0 0 1-8-1.5"/>
+    <path d="M17 22v-4h-4"/>
+    <path d="M20.996 15.251A4.5 4.5 0 0 0 17.495 8h-1.79a7 7 0 1 0-12.709 5.607"/>
+    <path d="M7 10v4h4"/>
+    <path d="m7 14 1.535-1.605a5 5 0 0 1 8 1.5"/>
+  </g>
+</svg>

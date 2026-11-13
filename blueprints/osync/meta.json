@@ -1,0 +1,22 @@
+{
+  "id": "osync",
+  "name": "Osync",
+  "version": "2.6.0",
+  "description": "Osync is a self-hosted, end-to-end encrypted vault sync server for Obsidian. Notes are encrypted on-device (AES-256-GCM) before upload, so the server only stores encrypted blobs. This template runs the API with PostgreSQL and S3 storage (Silo, a MinIO fork) on a second domain for presigned blob transfers. After deploy, sign in at /admin/ with the generated admin credentials, create an invite code, then sign up at /signup/ and point the Obsidian plugin at your domain. The Obsidian mobile apps need HTTPS: enable it on both domains and switch the four URL variables (PUBLIC_URL, CORS_ORIGIN, S3_PUBLIC_ENDPOINT, MINIO_PUBLIC_URL) to https://.",
+  "logo": "osync.svg",
+  "links": {
+    "github": "https://github.com/KORThomasJeong/Osync-p",
+    "website": "https://github.com/KORThomasJeong/Osync-p",
+    "docs": "https://github.com/KORThomasJeong/Osync-p#self-hosting"
+  },
+  "tags": [
+    "obsidian",
+    "sync",
+    "notes",
+    "self-hosted",
+    "encryption"
+  ],
+  "seoTitle": "Osync Docker Compose Setup",
+  "seoDescription": "Self-hosted, end-to-end encrypted Obsidian sync. Deploy Osync with Docker Compose on Dokploy – PostgreSQL, S3 storage via Silo and presigned blob transfers.",
+  "newConfig": true
+}

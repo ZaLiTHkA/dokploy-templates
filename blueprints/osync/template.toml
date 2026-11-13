@@ -1,0 +1,60 @@
+[variables]
+main_domain = "${domain}"
+s3_domain = "${domain}"
+postgres_password = "${password:32}"
+s3_secret_key = "${password:32}"
+minio_kms_key = "${base64:32}"
+better_auth_secret = "${hash:64}"
+sync_token_secret = "${hash:64}"
+admin_email = "${email}"
+admin_password = "${password:24}"
+
+[config]
+env = [
+  "POSTGRES_USER=osync",
+  "POSTGRES_PASSWORD=${postgres_password}",
+  "POSTGRES_DB=osync",
+
+  "S3_ACCESS_KEY=osync",
+  "S3_SECRET_KEY=${s3_secret_key}",
+  "S3_BUCKET=osync-bucket",
+  "S3_REGION=us-east-1",
+  # Never change after the first deploy, or stored blobs become unreadable.
+  "MINIO_KMS_SECRET_KEY=osync-key:${minio_kms_key}",
+
+  "BETTER_AUTH_SECRET=${better_auth_secret}",
+  "SYNC_TOKEN_SECRET=${sync_token_secret}",
+
+  # Public URLs (no trailing slash) must match the domains below, scheme included:
+  # an https:// PUBLIC_URL makes the session cookie Secure-only, so sign-in fails
+  # over plain HTTP. The Obsidian mobile apps require HTTPS: when you enable it on
+  # both domains, switch all four URLs to https:// and redeploy.
+  # S3_PUBLIC_ENDPOINT and MINIO_PUBLIC_URL must be identical.
+  "PUBLIC_URL=http://${main_domain}",
+  "CORS_ORIGIN=http://${main_domain}",
+  "S3_PUBLIC_ENDPOINT=http://${s3_domain}",
+  "MINIO_PUBLIC_URL=http://${s3_domain}",
+
+  "PORT=3000",
+  "LANGUAGE=en",
+  "SELF_HOSTED=true",
+  "SYNC_TOKEN_TTL_SECONDS=120",
+
+  # First-run admin account. Sign in at /admin/, create an invite code, then
+  # remove these two lines and redeploy.
+  "ADMIN_EMAIL=${admin_email}",
+  "ADMIN_PASSWORD=${admin_password}",
+]
+
+# API, admin panel and sign-up pages.
+[[config.domains]]
+serviceName = "osync"
+port = 3000
+host = "${main_domain}"
+
+# The Obsidian plugin uploads/downloads encrypted blobs directly to the S3 store
+# via presigned URLs, so it needs its own publicly reachable hostname.
+[[config.domains]]
+serviceName = "osync-minio"
+port = 9000
+host = "${s3_domain}"
